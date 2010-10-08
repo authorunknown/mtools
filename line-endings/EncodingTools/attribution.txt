@@ -1,0 +1,2 @@
+Credit for EncodingTools is due to Carsten Zeumer
+http://www.codeproject.com/KB/recipes/DetectEncoding.aspx

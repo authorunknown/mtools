@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NormalizeLineEndings", "NormalizeLineEndings\NormalizeLineEndings.csproj", "{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncodingTools", "EncodingTools\EncodingTools.csproj", "{CA19D4DE-B232-491A-92BF-7BF3A2758694}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Debug|x64.ActiveCfg = Debug|x64
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Debug|x64.Build.0 = Debug|x64
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Debug|x86.ActiveCfg = Debug|x86
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Debug|x86.Build.0 = Debug|x86
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Release|x64.ActiveCfg = Release|x64
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Release|x64.Build.0 = Release|x64
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Release|x86.ActiveCfg = Release|x86
+		{C5ADE042-5D53-48EF-8BA8-82F7C1A1210F}.Release|x86.Build.0 = Release|x86
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Release|x64.ActiveCfg = Release|Any CPU
+		{CA19D4DE-B232-491A-92BF-7BF3A2758694}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

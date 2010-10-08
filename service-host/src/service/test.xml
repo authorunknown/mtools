@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <imagePath>D:\_tfs\apps\generic-service\src\TestApp\bin\Debug\TestApp.exe</imagePath>
+  <workingDirectory>D:\_tfs</workingDirectory>
+  <arguments>
+    <arg>get</arg>
+    <arg>.</arg>
+    <arg>-recursive</arg>
+  </arguments>
+  <maxNumberOfLogBackups>1</maxNumberOfLogBackups>
+  <bufferSize>1024</bufferSize>
+  <logFile>D:\TestApp-log.txt</logFile>
+  <maxLogSize>1048576</maxLogSize>
+  <!-- A reliable log is one that throws exceptions when something goes wrong.  An unreliable log won't crash
+       your service if someone else has the log file locked or it can't write it for whatever reason.  It
+       will fail silently when something goes wrong. Default is false (unreliable)-->
+  <!--<reliableLogging>true</reliableLogging>-->
+</service>
