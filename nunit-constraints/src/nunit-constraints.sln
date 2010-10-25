@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "framework", "NUnitFramework\framework\framework.csproj", "{DE524EF2-B9B2-40AA-8C8A-50B191FF0F9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{6B8FC1E4-AAAA-4101-BA19-8C53BD4121D0}"
+	ProjectSection(SolutionItems) = preProject
+		..\license.rtf = ..\license.rtf
+		..\license.txt = ..\license.txt
+		..\nunit-constraints.build = ..\nunit-constraints.build
+		..\nunit.snk = ..\nunit.snk
+		..\readme.txt = ..\readme.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://makytfs01:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NUnitFramework\\framework\\framework.csproj
+		SccProjectName1 = NUnitFramework/framework
+		SccLocalPath1 = NUnitFramework\\framework
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE524EF2-B9B2-40AA-8C8A-50B191FF0F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE524EF2-B9B2-40AA-8C8A-50B191FF0F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE524EF2-B9B2-40AA-8C8A-50B191FF0F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE524EF2-B9B2-40AA-8C8A-50B191FF0F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
