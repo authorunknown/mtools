@@ -4,3 +4,5 @@ obj/
 *.FileListAbsolute.txt
 *.suo
 *.sln.cache
+build/
+msbuild.log
