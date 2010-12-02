@@ -4,3 +4,4 @@ obj/
 *.FileListAbsolute.txt
 *.suo
 *.sln.cache
+build/
