@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="nunit-constraints" default="help" xmlns="http://nant.sf.net/schemas/nant.xsd">
+  <property name="project.root" value="${path::get-directory-name(project::get-buildfile-path())}"/>
+  <property name="build.basedir" value="${project.root}\build"/>
+  <property name="build.dir" value="${build.basedir}\${build.runtime}\${build.flavor}" dynamic="true"/>
+  <property name="build.config" value="" />
+  <property name="build.debug" value="" />
+  <property name="build.defines" value="" />
+  <property name="build.runtime" value=""/>
+
+  <property name="temp.now" value="${datetime::now()}"/>
+  <property name="version.major" value="1"/>
+  <property name="version.minor" value="3"/>
+  <property name="version.revision" value="${datetime::get-year(temp.now) - 2000}${datetime::get-day-of-year(temp.now)}"/>
+  <property name="version.build" value="${datetime::get-hour(temp.now) + 1}${datetime::get-minute(temp.now)}"/>
+  <property name="version.number"
+            value="${version.major}.${version.minor}.${version.revision}.${version.build}"
+            unless="${property::exists('version.number') and version.number != ''}"/>
+
+  <!-- 4.0 framework -->
+  <target name="net-4.0" description="target the 4.0 framework">
+    <call target="set-net-4.0-configuration" if="${(not property::exists('build.runtime')) or build.runtime == ''}"/>
+  </target>
+  <target name="set-net-4.0-configuration">
+    <property name="build.runtime" value="net-4.0"/>
+  </target>
+
+  <!-- 3.5 framework -->
+  <target name="net-3.5" description="(default) target the 3.5 framework">
+    <call target="set-net-3.5-configuration" if="${(not property::exists('build.runtime')) or build.runtime == ''}"/>
+  </target>
+  <target name="set-net-3.5-configuration">
+    <property name="build.runtime" value="net-3.5"/>
+  </target>
+
+  <!-- release config -->
+  <target name="release" description="do a release build">
+    <call target="set-release-configuration" if="${(not property::exists('build.flavor')) or build.flavor == ''}"/>
+  </target>
+  <target name="set-release-configuration">
+    <property name="build.debug" value="false"/>
+    <property name="build.defines" value="TRACE,NET_2_0,NET_3_5"/>
+    <property name="build.flavor" value="release"/>
+  </target>
+
+  <!-- debug config-->
+  <target name="debug" description="(default) do a debug build">
+    <call target="set-debug-configuration" if="${(not property::exists('build.flavor')) or build.flavor == ''}"/>
+  </target>
+  <target name="set-debug-configuration">
+    <property name="build.debug" value="true"/>
+    <property name="build.defines" value="TRACE,DEBUG,NET_2_0,NET_3_5" />
+    <property name="build.flavor" value="debug"/>
+  </target>
+
+  <!-- versioning & building -->
+  <target name="clean" description="delete previously built files">
+    <delete>
+      <fileset>
+        <include name="${project.root}\**\obj"/>
+        <include name="${project.root}\**\bin"/>
+      </fileset>
+    </delete>
+    <delete dir="${build.basedir}" />
+  </target>
+
+  <target name="rebuild" depends="clean build" description="force a full re-compile instead of doing an incremental build" />
+
+  <target name="version-assembly" description="re-generate CommonAssemblyInfo.cs which lists version and release / debug assembly attributes">
+    <asminfo output="${project.root}\src\CommonAssemblyInfo.cs" language="CSharp">
+      <imports>
+        <import namespace="System.Reflection"/>
+      </imports>
+      <attributes>
+        <attribute type="AssemblyVersionAttribute" value="${version.number}"/>
+        <attribute type="AssemblyInformationalVersionAttribute" value="${version.number}"/>
+        <attribute type="AssemblyConfigurationAttribute" value="${build.flavor}"/>
+      </attributes>
+    </asminfo>
+  </target>
+
+  <target name="build-all" description="builds the project for all available configurations and .net framework versions" depends="clean">
+    <call target="set-net-3.5-configuration"/>
+    <call target="set-debug-configuration"/>
+    <call target="build"/>
+    <call target="set-release-configuration"/>
+    <call target="build"/>
+
+    <call target="set-net-4.0-configuration"/>
+    <call target="set-debug-configuration"/>
+    <call target="build"/>
+    <call target="set-release-configuration"/>
+    <call target="build"/>
+  </target>
+
+  <target name="build" depends="version-assembly" description="does the build">
+    <call target="set-net-3.5-configuration" if="${(not property::exists('build.runtime')) or build.runtime == ''}"/>
+    <call target="set-debug-configuration" if="${(not property::exists('build.flavor')) or build.flavor == ''}"/>
+    <echo message="Building ${project::get-name()} for ${build.runtime} in ${build.flavor} configuration"/>
+    <property name="nant.settings.currentframework" value="${build.runtime}"/>
+    <csc checked="false"
+         debug="${build.debug}"
+         optimize="${not build.debug}"
+         define="${build.defines}"
+         keyfile="${project.root}\nunit.snk"
+         doc="${build.dir}\nunit.constraints.xml"
+         warninglevel="4"
+         output="${build.dir}\nunit.constraints.dll"
+         target="library">
+      <nowarn>
+        <warning number="1572"/>
+        <warning number="1573"/>
+        <warning number="1574"/>
+        <warning number="1591"/>
+      </nowarn>
+      <references>
+        <include name="${project.root}\lib\*.dll"/>
+        <include name="${project.root}\lib\${build.runtime}\*.dll"/>
+        <include name="System.configuration.dll" />
+        <include name="System.Core.dll"/>
+        <include name="System.Data.dll"/>
+        <include name="System.dll"/>
+        <include name="Microsoft.VisualStudio.QualityTools.UnitTestFramework"/>
+        <include name="System.Xml.dll"/>
+      </references>
+      <sources basedir="${project.root}\src">
+        <include name="**\*.cs"/>
+        <include name="CommonAssemblyInfo.cs"/>
+      </sources>
+    </csc>
+    <copy todir="${build.dir}" flatten="true">
+      <fileset>
+        <include name="${project.root}\lib\*.dll"/>
+        <include name="${project.root}\lib\${build.runtime}\*.dll"/>
+      </fileset>
+    </copy>
+  </target>
+  <target name="help">
+    <echo message="Usage:"/>
+    <echo message="   nant -projecthelp                    -- print a detailed listing of available targets"/>
+    <echo message="   nant build                           -- build ${project::get-name()} using all defaults"/>
+    <echo message="   nant build /D:version.number=1.3.0.0 -- override version number"/>
+    <echo message="   nant net-4.0 release build           -- build a release dll that targets the 4.0 framework"/>
+    <echo message="   nant net-3.5 debug build             -- build a debug version that targets the 3.5 framework"/>
+  </target>
+</project>
